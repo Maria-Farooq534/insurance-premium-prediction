@@ -1,0 +1,20 @@
+services:
+  backend:
+    image: mariafarooq534/insurance-premium-api:latest
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+
+
+  frontend:
+    image: mariafarooq534/insurance-premium-frontend
+    ports:
+      - "127.0.0.1:8501:8501"
+
+    environment:
+      API_URL: http://backend:8000/predict
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
